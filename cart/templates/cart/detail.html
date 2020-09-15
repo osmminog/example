@@ -1,0 +1,97 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% trans "Ваша корзина" %}{% endblock %}
+{% block content %}
+  <h1>{% trans "Ваша корзина" %}</h1>
+  <table class="cart">
+    <thead>
+      <tr>
+        <th></th>
+        <th>{% trans "Товар" %}</th>
+        <th>{% trans "Количество" %}</th>
+        <th>{% trans "Удалить" %}</th>
+        <th>{% trans "Цена за еденицу" %}</th>
+        <th>{% trans "Итого" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart %}
+        {% with product=item.product %}
+          <tr>
+            <td>
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{% if product.image %}{{ product.image.url }}
+                        {% else %}{% static 'img/no_image.png' %}{% endif %}">
+               </a>
+             </td>
+             <td>{{ product.name }}</td>
+             <td>
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ item.update_quantity_form.quantity }}
+                    {{ item.update_quantity_form.update }}
+                    <input type="submit" value="{% trans "Обновить" %}">
+                    {% csrf_token %}
+                </form>                                
+             </td>
+             <td><a href="{% url 'cart:cart_remove' product.id%}">{% trans "Удалить" %}</a></td>
+             <td class="num">{{ item.price }} руб.</td>
+             <td class="num">{{ item.total_price }} руб.</td>
+           </tr>
+        {% endwith %}
+      {% endfor %}
+      {% if cart.coupon %}
+  <tr class="subtotal">
+    <td>{% trans "Подытог" %}</td>
+    <td colspan="4"></td>
+    <td class="num">{{ cart.get_total_price|floatformat:"2" }} руб.</td>
+  </tr>
+  <tr>
+    {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+    <td>"купон {{ code }}" скидка ({{ discount }}%)</td>
+    {% endblocktrans %}
+    <td colspan="4"></td>
+    <td class="num neg">
+      - {{ cart.get_discount|floatformat:"2" }} руб.
+    </td>
+  </tr>
+{% endif %}
+<tr class="total">
+  <td>{% trans "Итого" %}</td>
+  <td colspan="4"></td>
+  <td class="num">
+    {{ cart.get_total_price_after_discount|floatformat:"2" }} руб.
+  </td>
+</tr>
+
+    </tbody>
+  </table>
+
+  {% if product.category.slug != 'upsales' %}
+    <div class="recommendations cart">
+      <h3>{% trans "Люди часто также покупают" %}</h3>
+      {% for product in products %}
+        {% if product.category.slug == 'upsales' %}
+          <div class="item">
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+            </a>
+            <p><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <p class="text-right">{% trans "Использовать купон" %}:</p>
+<form class="text-right" action="{% url "coupons:apply" %}" method="post">
+  {{ coupon_apply_form }}
+  <input type="submit" value="{% trans "Применить" %}">
+  {% csrf_token %}
+</form>
+
+  <p class="text-right">
+    <a href="{% url 'shop:product_list' %}" class="button light">{% trans "Продолжить покупки" %}</a>
+    <a href="{% url 'orders:order_create' %}" class="button">{% trans "Оформить заказ" %}</a>
+  </p>
+{% endblock %}

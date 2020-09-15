@@ -1,0 +1,54 @@
+<html>
+  <body>
+    <h1>My Shop</h1>
+    <p>
+      Заказ № {{ order.id }}</br>
+      <span class="secondary">
+        {{ order.created|date:"M d, Y" }}
+      </span>
+    </p>
+    <h3>Покупатель</h3>
+    <p>
+      {{ order.first_name }} {{ order.last_name }}<br>
+      {{ order.email }}<br>
+      {{ order.address }}<br>
+      {{ order.postal_code }}, {{ order.city }}
+    </p>
+    <h3>Купленные товары</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Товар</th>
+          <th>Стоимость</th>
+          <th>Количество</th>
+          {% if order.discount %}
+            <th>Скидка</th>
+          {% else %}
+          {% endif %}
+          <th>Итого</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for item in order.items.all %}
+        <tr class="row{% cycle "1" "2" %}">
+          <td>{{ item.product.name }}</td>
+          <td class="num">{{ item.price }} руб.</td>
+          <td class="num">{{ item.quantity }}</td>
+          {% if order.discount %}
+            <td class="num"> {{ order.discount }}% </td>
+          {% else %}
+          {% endif %}
+          <td class="num">{{ item.get_cost }} руб.</td>
+        </tr>
+      {% endfor %}
+      <tr class="total">
+        <td colspan="{% if order.discount %}4{% else %}3{% endif %}">Итого</td>
+        <td class="num">{{ order.get_total_cost }} руб.</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="{% if order.paid %}paid{% else %}pending{% endif %}">
+    {% if order.paid %}Оплачен{% else %}Ожидается оплата{% endif %}
+  </span>
+</body>
+</html>

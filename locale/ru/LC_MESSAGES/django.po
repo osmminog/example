@@ -1,0 +1,160 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-26 19:32+0500\n"
+"PO-Revision-Date: 2020-08-26 19:31+0000\n"
+"Last-Translator: b'  <>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.9.4\n"
+
+#: .\cart\forms.py:9 .\cart\templates\cart\detail.html:12
+msgid "Количество"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:4 .\cart\templates\cart\detail.html:6
+#: .\shop\templates\shop\base.html:33
+msgid "Ваша корзина"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:11
+msgid "Товар"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:13 .\cart\templates\cart\detail.html:37
+msgid "Удалить"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:14
+msgid "Цена за еденицу"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:15 .\cart\templates\cart\detail.html:60
+msgid "Итого"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:33
+msgid "Обновить"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:45
+msgid "Подытог"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:50
+#, python-format
+msgid ""
+"\n"
+"    <td>\"купон %(code)s\" скидка (%(discount)s%%)</td>\n"
+"    "
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:69
+msgid "Использовать купон"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:72
+msgid "Применить"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:77
+msgid "Продолжить покупки"
+msgstr ""
+
+#: .\cart\templates\cart\detail.html:78
+msgid "Оформить заказ"
+msgstr ""
+
+#: .\coupons\forms.py:6
+msgid "Купон"
+msgstr ""
+
+#: .\myshop\settings.py:128
+msgid "Русский"
+msgstr ""
+
+#: .\myshop\settings.py:129
+msgid "Английский"
+msgstr ""
+
+#: .\myshop\urls.py:11
+msgid "admin/"
+msgstr ""
+
+#: .\myshop\urls.py:12
+msgid "cart/"
+msgstr "корзина/"
+
+#: .\myshop\urls.py:13
+msgid "orders/"
+msgstr "заказы/"
+
+#: .\myshop\urls.py:14
+msgid "payment/"
+msgstr "оплата/"
+
+#: .\myshop\urls.py:15
+msgid "coupons/"
+msgstr "купоны/"
+
+#: .\payment\urls.py:9
+msgid "process/"
+msgstr "процесс/"
+
+#: .\payment\urls.py:10
+msgid "done/"
+msgstr "выполнено/"
+
+#: .\payment\urls.py:11
+msgid "canceled/"
+msgstr "отменено/"
+
+#: .\shop\templates\shop\base.html:7 .\shop\templates\shop\base.html:12
+msgid "Мой магазин"
+msgstr ""
+
+#: .\shop\templates\shop\base.html:17
+msgid "Язык"
+msgstr ""
+
+#: .\shop\templates\shop\base.html:35
+#, python-format
+msgid ""
+"\n"
+"            %(total_items)s товар%(total_items_plural)s \n"
+"          %(total_price)s руб.\n"
+"          "
+msgstr ""
+
+#: .\shop\templates\shop\base.html:41
+msgid "Ваша корзина пуста."
+msgstr ""
+
+#: .\shop\templates\shop\product\detail.html:19
+msgid "Добавить в корзину"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:9
+msgid "Категории"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:12
+msgid "Все товары"
+msgstr ""
+
+#: .\shop\templates\shop\product\list.html:22
+msgid "Товары"
+msgstr ""

@@ -1,0 +1,40 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+{% block content %}
+  <div class="product-detail">
+    <img src="{% if product.image %}{{ product.image.url }}{% else %}
+                         {% static "img/no_image.png" %}{% endif %}">
+    <h1>{{ product.name }}</h1>
+    <h2>
+      <a href="{{ product.category.get_absolute_url }}">{{product.category }}</a>
+    </h2>
+    <p class="price">{{ product.price }} руб.</p>
+      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {{ cart_product_form }}
+        {% csrf_token %}
+        <input type="submit" value="{% trans "Добавить в корзину" %}">
+      </form>
+    {{ product.description|linebreaks }}
+  </div>
+  
+      {% if product.category.slug != 'upsales' %}
+        <div class="recommendations">
+          <h3>Рекомендуем</h3>
+          {% for product in products %}
+            {% if product.category.slug == 'upsales' %}
+            <div class="item">
+              <a href="{{ product.get_absolute_url }}">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+              </a> 
+              <p><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></p>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+{% endblock %}

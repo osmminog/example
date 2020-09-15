@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% trans "Мой магазин" %}{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header">
+      <a href="/" class="logo">{% trans "Мой магазин" %}</a>
+      {% get_current_language as LANGUAGE_CODE %}
+      {% get_available_languages as LANGUAGES %}
+      {% get_language_info_list for LANGUAGES as languages %}
+      <div class="languages">
+        <p>{% trans "Язык" %}:</p>
+        <ul class="languages">
+          {% for language in languages %}
+            <li>
+              <a href='/{{ language.code }}/' 
+              {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+              {{ language.name_local }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div id="subheader">
+      {% with total_items=cart|length %}
+      {% if cart|length > 0 %}
+        {% trans "Ваша корзина" %}:
+        <a href="{% url 'cart:cart_detail' %}">
+          {% blocktrans with total_items_plural=total_items|pluralize total_price=cart.get_total_price %}
+            {{ total_items }} товар{{ total_items_plural }} 
+          {{ total_price }} руб.
+          {% endblocktrans %}
+        </a>
+      {% else %}
+        {% trans "Ваша корзина пуста." %}
+      {% endif %}
+      {% endwith %}  
+    </div>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
